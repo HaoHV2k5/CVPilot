@@ -1,0 +1,42 @@
+# Environment variables & secrets
+.env
+*.env
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE & Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Build & Dependencies - Java
+target/
+*.class
+
+# Build & Dependencies - Node / Next.js
+node_modules/
+.next/
+out/
+build/
+dist/
+
+# Build & Dependencies - Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+.pytest_cache/
+
+# Coverage
+coverage/
+*.lcov
