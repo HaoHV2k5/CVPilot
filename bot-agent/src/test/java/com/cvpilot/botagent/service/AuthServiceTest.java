@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.modelmapper.ModelMapper;
+import org.mapstruct.factory.Mappers;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -43,7 +43,7 @@ class AuthServiceTest {
     void setUp() {
         passwordEncoder = new BCryptPasswordEncoder();
         jwtTokenProvider = new JwtTokenProvider("super_secret_jwt_key_that_is_at_least_32_bytes_long_for_tests", 86400000L);
-        userMapper = new UserMapper(new ModelMapper());
+        userMapper = Mappers.getMapper(UserMapper.class);
         authService = new AuthServiceImpl(userRepository, userMapper, passwordEncoder, jwtTokenProvider);
     }
 

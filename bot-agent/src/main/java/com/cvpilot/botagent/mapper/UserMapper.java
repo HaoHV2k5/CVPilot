@@ -3,33 +3,19 @@ package com.cvpilot.botagent.mapper;
 import com.cvpilot.botagent.dto.RegisterRequest;
 import com.cvpilot.botagent.dto.UserResponse;
 import com.cvpilot.botagent.entity.User;
-import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-@Component
-public class UserMapper {
+@Mapper(componentModel = "spring")
+public interface UserMapper {
 
-    private final ModelMapper modelMapper;
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "passwordHash", ignore = true)
+    @Mapping(target = "role", constant = "USER")
+    @Mapping(target = "status", constant = "ACTIVE")
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    User toEntity(RegisterRequest request);
 
-    public UserMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
-
-    public User toEntity(RegisterRequest request) {
-        if (request == null) {
-            return null;
-        }
-        User user = modelMapper.map(request, User.class);
-        user.setEmail(request.getEmail().trim().toLowerCase());
-        user.setRole("USER");
-        user.setStatus("ACTIVE");
-        return user;
-    }
-
-    public UserResponse toResponse(User user) {
-        if (user == null) {
-            return null;
-        }
-        return modelMapper.map(user, UserResponse.class);
-    }
+    UserResponse toResponse(User user);
 }
