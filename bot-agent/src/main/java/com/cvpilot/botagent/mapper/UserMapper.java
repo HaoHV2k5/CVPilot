@@ -19,9 +19,8 @@ public class UserMapper {
         if (request == null) {
             return null;
         }
-        User user = new User();
+        User user = modelMapper.map(request, User.class);
         user.setEmail(request.getEmail().trim().toLowerCase());
-        user.setFullName(request.getFullName().trim());
         user.setRole("USER");
         user.setStatus("ACTIVE");
         return user;
